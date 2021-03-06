@@ -502,6 +502,11 @@
             <param name="id">id</param>
             <param name="title">title</param>
         </member>
+        <member name="T:JeanetteDemoApp.Models.Category">
+            <summary>
+            Represents a category
+            </summary>
+        </member>
         <member name="P:JeanetteDemoApp.Models.Category.Id">
             <summary>
             CategoryId
@@ -520,6 +525,11 @@
         <member name="P:JeanetteDemoApp.Models.Category.Clip">
             <summary>
             Clips in the category
+            </summary>
+        </member>
+        <member name="T:JeanetteDemoApp.Models.Clip">
+            <summary>
+            Represents a clip
             </summary>
         </member>
         <member name="P:JeanetteDemoApp.Models.Clip.Id">

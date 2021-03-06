@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using static DataAccess.Logic.CategoryProcessor;
 
 namespace JeanetteDemoApp.Controllers
 {
@@ -17,20 +18,20 @@ namespace JeanetteDemoApp.Controllers
         public CategoryController()
         {
           
-            clip.Add(new Clip
-            {
-                Title = "klipp tittel",
-                CategoryId = 1,
-                Hidden = false,
-                Id = 1,
-            });
-            category.Add(new Category
-            {
-                Title = "Tittelen",
-                Id = 1,
-                Active = true,
-                Clip = clip
-            });
+            //clip.Add(new Clip
+            //{
+            //    Title = "klipp tittel",
+            //    CategoryId = 1,
+            //    Hidden = false,
+            //    Id = 1,
+            //});
+            //category.Add(new Category
+            //{
+            //    Title = "Tittelen",
+            //    Id = 1,
+            //    Active = true,
+            //    Clip = clip
+            //});
         }
 
         /// <summary>
@@ -41,7 +42,37 @@ namespace JeanetteDemoApp.Controllers
         // GET api/values
         public List<Category> Get()
         {
-            return category;
+            var list = new List<Category>();
+            var result = LoadCategories();
+            if (result.Any())
+            {
+                foreach(var item in result)
+                {
+                    var cat = new Category
+                    {
+                        Active = item.Active,
+                        Id = item.Id,
+                        Title = item.Title                 
+                    };
+                    list.Add(cat);
+                }
+            }
+            return list;
+
+            //CreateCategory
+
+            //try
+            //{
+            //    DataAccess.Access.SqlDataAccess db = new DataAccess.Access.SqlDataAccess()
+            //    {
+            //        category = db.();
+            //        return category;
+            //    }                
+            //}
+            //catch (Exception e)
+            //{
+            //    return null;
+            //}
         }
 
         /// <summary>
@@ -53,20 +84,7 @@ namespace JeanetteDemoApp.Controllers
         public Category Get(int id)
         {
             return category.Where(i => i.Id == id).FirstOrDefault();
-            //try
-            //{
-            //    DataAccess.DataAccess.SqlDataAccess db = new DataAccess.DataAccess.SqlDataAccess();
-            //    {
-            //        category = db.GetCategories();
-            //    }
-
-            //    return category;
-            //}
-            //catch (Exception e)
-            //{
-            //    _logger.LogError("Error getting categories " + e.Message);
-            //    return null;
-            //}
+            
         }
 
         /// <summary>
@@ -89,7 +107,20 @@ namespace JeanetteDemoApp.Controllers
 
         public void Post(Category value)
         {
-            category.Add(value);
+            var listClips = new List<DataAccess.Models.ClipModel>();
+            foreach (var cl in value.Clip)
+            {
+                var clipp = new DataAccess.Models.ClipModel()
+                {
+                    CategoryId = value.Id,
+                    Title = cl.Title,
+                    Hidden = cl.Hidden,
+                };
+                listClips.Add(clipp);
+            }
+            int created = CreateCategory(value.Id,
+                value.Title, value.Active, listClips);
+            //category.Add(value);
         }
 
         // DELETE api/values/5

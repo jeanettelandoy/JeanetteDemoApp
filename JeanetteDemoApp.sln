@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeanetteDemoApp", "JeanetteDemoApp\JeanetteDemoApp.csproj", "{C550930B-9995-4C18-96F7-79D4DA756CD8}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SQLDemoProject", "SQLDemoProject\SQLDemoProject.sqlproj", "{F558EC62-C4B0-47C8-B465-91B60E80EFD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,16 @@ Global
 		{C550930B-9995-4C18-96F7-79D4DA756CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C550930B-9995-4C18-96F7-79D4DA756CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C550930B-9995-4C18-96F7-79D4DA756CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
