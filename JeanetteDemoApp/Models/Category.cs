@@ -17,7 +17,7 @@ namespace JeanetteDemoApp.Models
         /// <summary>
         /// Category title
         /// </summary>
-        public string Title { get; set; }
+        public string CategoryTitle { get; set; }
         /// <summary>
         /// Is category active
         /// </summary>

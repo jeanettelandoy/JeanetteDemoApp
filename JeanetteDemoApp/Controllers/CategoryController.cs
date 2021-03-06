@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using static DataAccess.Logic.CategoryProcessor;
+using static DataLibrary.Logic.CategoryProcessor;
 
 namespace JeanetteDemoApp.Controllers
 {
@@ -17,7 +17,7 @@ namespace JeanetteDemoApp.Controllers
         List<Clip> clip = new List<Clip>();
         public CategoryController()
         {
-          
+
             //clip.Add(new Clip
             //{
             //    Title = "klipp tittel",
@@ -43,22 +43,24 @@ namespace JeanetteDemoApp.Controllers
         public List<Category> Get()
         {
             var list = new List<Category>();
+
             var result = LoadCategories();
             if (result.Any())
             {
-                foreach(var item in result)
+                foreach (var item in result)
                 {
                     var cat = new Category
                     {
                         Active = item.Active,
                         Id = item.Id,
-                        Title = item.Title                 
+                        CategoryTitle = item.CategoryTitle
                     };
                     list.Add(cat);
                 }
             }
             return list;
 
+          //  return category;
             //CreateCategory
 
             //try
@@ -83,8 +85,13 @@ namespace JeanetteDemoApp.Controllers
         // GET api/values/5
         public Category Get(int id)
         {
-            return category.Where(i => i.Id == id).FirstOrDefault();
-            
+            var result = LoadCategories();
+            result.Where(i => i.Id == id).FirstOrDefault();
+            return new Category {
+                Active = result.FirstOrDefault().Active,
+                CategoryTitle = result.FirstOrDefault().CategoryTitle,
+          
+            }; result.FirstOrDefault();
         }
 
         /// <summary>
@@ -107,19 +114,28 @@ namespace JeanetteDemoApp.Controllers
 
         public void Post(Category value)
         {
-            var listClips = new List<DataAccess.Models.ClipModel>();
-            foreach (var cl in value.Clip)
+            var listClips = new List<DataLibrary.Models.ClipModel>();
+            if(value.Clip != null)
             {
-                var clipp = new DataAccess.Models.ClipModel()
+                foreach (var cl in value.Clip)
                 {
-                    CategoryId = value.Id,
-                    Title = cl.Title,
-                    Hidden = cl.Hidden,
-                };
-                listClips.Add(clipp);
+                    var clipp = new DataLibrary.Models.ClipModel()
+                    {
+                        CategoryId = value.Id,
+                        Title = cl.Title,
+                        Hidden = cl.Hidden,
+                    };
+                    listClips.Add(clipp);
+                }
+                    int created = CreateCategory(value.Id,
+                value.CategoryTitle, value.Active, listClips);
             }
-            int created = CreateCategory(value.Id,
-                value.Title, value.Active, listClips);
+            else
+            {
+                int created = CreateCategory(value.Id,
+                                value.CategoryTitle, value.Active, null);
+            }
+            
             //category.Add(value);
         }
 

@@ -512,7 +512,7 @@
             CategoryId
             </summary>
         </member>
-        <member name="P:JeanetteDemoApp.Models.Category.Title">
+        <member name="P:JeanetteDemoApp.Models.Category.CategoryTitle">
             <summary>
             Category title
             </summary>

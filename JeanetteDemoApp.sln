@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeanetteDemoApp", "Jeanette
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SQLDemoProject", "SQLDemoProject\SQLDemoProject.sqlproj", "{F558EC62-C4B0-47C8-B465-91B60E80EFD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{AB615BD8-6429-4944-8328-BCF346F3630B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,10 @@ Global
 		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F558EC62-C4B0-47C8-B465-91B60E80EFD5}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72BC9C71-F785-4758-A2B5-8F65EBE9D57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB615BD8-6429-4944-8328-BCF346F3630B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB615BD8-6429-4944-8328-BCF346F3630B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB615BD8-6429-4944-8328-BCF346F3630B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB615BD8-6429-4944-8328-BCF346F3630B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
