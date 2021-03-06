@@ -25,6 +25,6 @@ namespace JeanetteDemoApp.Models
         /// <summary>
         /// Clips in the category
         /// </summary>
-        public List<Clip> Clip { get; set; }
+        public Clip Clip { get; set; }
     }
 }

@@ -14,30 +14,23 @@ namespace DataLibrary.Logic
 {
     public static class CategoryProcessor
     {
-        public static int CreateCategory(int id, string title, bool active, List<ClipModel> clip)
+        public static int CreateCategory(int id, string title, bool active, ClipModel clip)
         {
-            var listOfClips = new List<ClipModel>();
-            if(clip != null)
+            var clippy = new ClipModel 
             {
-                foreach (var c in clip)
-                {
-                    ClipModel clippi = new ClipModel
-                    {
-                        CategoryId = id,
-                        Hidden = c.Hidden,
-                        Title = c.Title,
-                        Id = c.Id
-                    };
-                    listOfClips.Add(clippi);
-                }
-            }        
+                CategoryId = id,
+                Hidden = clip.Hidden,
+                Title = clip.Title,
+                Id = clip.Id
+            };         
+                              
          
             CategoryModel data = new CategoryModel
             {
                 Id = id,
                 CategoryTitle = title,
                 Active = active,                
-                Clip = listOfClips
+                Clip = clippy
             };
 
             string sql = @"insert into dbo.Category (Id, CategoryTitle, Active, Clips)

@@ -25,7 +25,7 @@ namespace DataLibrary.Access
             }
         }
 
-           public static int CreateCategory(int id, string title, bool active, List<ClipModel> clip)
+           public static int CreateCategory(int id, string title, bool active, ClipModel clip)
         {
             CategoryModel data = new CategoryModel
             {

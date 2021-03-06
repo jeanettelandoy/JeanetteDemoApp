@@ -6,32 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using static DataLibrary.Logic.CategoryProcessor;
 
 namespace JeanetteDemoApp.Controllers
 {
+    [EnableCors(origins: "https://localhost:44311/api/category", headers: "*", methods: "*")]
     public class CategoryController : ApiController
     {
 
-        List<Category> category = new List<Category>();
-        List<Clip> clip = new List<Clip>();
         public CategoryController()
         {
 
-            //clip.Add(new Clip
-            //{
-            //    Title = "klipp tittel",
-            //    CategoryId = 1,
-            //    Hidden = false,
-            //    Id = 1,
-            //});
-            //category.Add(new Category
-            //{
-            //    Title = "Tittelen",
-            //    Id = 1,
-            //    Active = true,
-            //    Clip = clip
-            //});
         }
 
         /// <summary>
@@ -40,6 +26,8 @@ namespace JeanetteDemoApp.Controllers
         /// <param name="id">id</param>
         /// <param name="active">active</param>
         // GET api/values
+        [AllowAnonymous]
+        [HttpGet]
         public List<Category> Get()
         {
             var list = new List<Category>();
@@ -59,22 +47,7 @@ namespace JeanetteDemoApp.Controllers
                 }
             }
             return list;
-
-          //  return category;
-            //CreateCategory
-
-            //try
-            //{
-            //    DataAccess.Access.SqlDataAccess db = new DataAccess.Access.SqlDataAccess()
-            //    {
-            //        category = db.();
-            //        return category;
-            //    }                
-            //}
-            //catch (Exception e)
-            //{
-            //    return null;
-            //}
+      
         }
 
         /// <summary>
@@ -102,9 +75,10 @@ namespace JeanetteDemoApp.Controllers
         // GET api/values/5
         [Route("api/category/GetClipsByCategory/{id}")]
         [HttpGet]
-        public List<Clip> GetClipsByCategory(int id)
+        public Clip GetClipsByCategory(int id)
         {
-            return clip.Where(i => i.CategoryId == id).ToList();         
+            return new Clip { };
+            //return clip.Where(i => i.CategoryId == id);         
         }
 
         // POST api/values
@@ -114,27 +88,27 @@ namespace JeanetteDemoApp.Controllers
 
         public void Post(Category value)
         {
-            var listClips = new List<DataLibrary.Models.ClipModel>();
+       
             if(value.Clip != null)
             {
-                foreach (var cl in value.Clip)
+                var clip = new DataLibrary.Models.ClipModel
                 {
-                    var clipp = new DataLibrary.Models.ClipModel()
-                    {
-                        CategoryId = value.Id,
-                        Title = cl.Title,
-                        Hidden = cl.Hidden,
-                    };
-                    listClips.Add(clipp);
-                }
-                    int created = CreateCategory(value.Id,
-                value.CategoryTitle, value.Active, listClips);
+                    CategoryId = value.Id,
+                    Hidden = value.Clip.Hidden,
+                    Title = value.Clip.Title
+                };
+
+                int created = CreateCategory(value.Id,
+                value.CategoryTitle, value.Active, clip);
             }
             else
             {
+
                 int created = CreateCategory(value.Id,
-                                value.CategoryTitle, value.Active, null);
+                value.CategoryTitle, value.Active, null);
             }
+                     
+           
             
             //category.Add(value);
         }

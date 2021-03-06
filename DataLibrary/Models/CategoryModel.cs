@@ -9,6 +9,6 @@ namespace DataLibrary.Models
         public int Id { get; set; }
         public string CategoryTitle { get; set; }
         public bool Active { get; set; }
-        public List<ClipModel> Clip { get; set; }
+        public ClipModel Clip { get; set; }
     }
 }
