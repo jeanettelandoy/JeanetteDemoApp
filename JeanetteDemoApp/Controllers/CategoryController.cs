@@ -87,29 +87,19 @@ namespace JeanetteDemoApp.Controllers
         //}
 
         public void Post(Category value)
-        {
-       
-            if(value.Clip != null)
+        {       
+           
+            var clip = new DataLibrary.Models.ClipModel
             {
-                var clip = new DataLibrary.Models.ClipModel
-                {
-                    CategoryId = value.Id,
-                    Hidden = value.Clip.Hidden,
-                    Title = value.Clip.Title
-                };
+                CategoryId = value.Id,
+                Hidden = value.Clip.Hidden,
+                Title = value.Clip.Title
+            };
 
-                CreateCategory(value.Id,
-                value.CategoryTitle, value.Active, clip);
-            }
-            else
-            {
-
-                CreateCategory(value.Id,
-                value.CategoryTitle, value.Active, null);
-            }
+            CreateCategory(value.Id,
+            value.CategoryTitle, value.Active, clip);           
                      
         }
-
 
     }
 }
