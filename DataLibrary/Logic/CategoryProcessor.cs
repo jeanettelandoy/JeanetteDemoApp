@@ -8,40 +8,39 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+using System.IO;
+using Newtonsoft.Json;
 
 namespace DataLibrary.Logic
 {
     public static class CategoryProcessor
     {
-        public static int CreateCategory(int id, string title, bool active, ClipModel clip)
-        {
-            var clippy = new ClipModel 
-            {
-                CategoryId = id,
-                Hidden = clip.Hidden,
-                Title = clip.Title,
-                Id = clip.Id
-            };         
-                              
-         
+        public static void CreateCategory(int id, string title, bool active, ClipModel clip)
+        {           
+
             CategoryModel data = new CategoryModel
             {
                 Id = id,
                 CategoryTitle = title,
-                Active = active,                
-                Clip = clippy
+                Active = active,     
+                  Clips = new ClipModel
+                  {
+                      CategoryId = id,
+                      Hidden = clip.Hidden,
+                      Title = clip.Title
+                  }
             };
 
             string sql = @"insert into dbo.Category (Id, CategoryTitle, Active, Clips)
                           values (@Id, @CategoryTitle, @Active, @Clips);";
 
-            return SqlDataAccess.SaveData(sql, data);
+            SqlDataAccess.SaveRecord(data); //.SaveData(sql, data);
+
         }
 
         public static List<CategoryModel> LoadCategories()
         {
-            string sql = @"select Id, CategoryTitle, Active, Clips
+            string sql = @"select Id, CategoryTitle, Active
                         from dbo.Category;";
 
             return SqlDataAccess.LoadData<CategoryModel>(sql);

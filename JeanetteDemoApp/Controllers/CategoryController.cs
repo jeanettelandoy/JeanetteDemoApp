@@ -11,7 +11,7 @@ using static DataLibrary.Logic.CategoryProcessor;
 
 namespace JeanetteDemoApp.Controllers
 {
-    [EnableCors(origins: "https://localhost:44311/api/category", headers: "*", methods: "*")]
+
     public class CategoryController : ApiController
     {
 
@@ -41,7 +41,7 @@ namespace JeanetteDemoApp.Controllers
                     {
                         Active = item.Active,
                         Id = item.Id,
-                        CategoryTitle = item.CategoryTitle
+                        CategoryTitle = item.CategoryTitle                      
                     };
                     list.Add(cat);
                 }
@@ -64,7 +64,7 @@ namespace JeanetteDemoApp.Controllers
                 Active = result.FirstOrDefault().Active,
                 CategoryTitle = result.FirstOrDefault().CategoryTitle,
           
-            }; result.FirstOrDefault();
+            }; 
         }
 
         /// <summary>
@@ -98,24 +98,18 @@ namespace JeanetteDemoApp.Controllers
                     Title = value.Clip.Title
                 };
 
-                int created = CreateCategory(value.Id,
+                CreateCategory(value.Id,
                 value.CategoryTitle, value.Active, clip);
             }
             else
             {
 
-                int created = CreateCategory(value.Id,
+                CreateCategory(value.Id,
                 value.CategoryTitle, value.Active, null);
             }
                      
-           
-            
-            //category.Add(value);
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
+
     }
 }

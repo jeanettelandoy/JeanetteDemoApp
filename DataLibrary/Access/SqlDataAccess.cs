@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using DataLibrary.Models;
+using System.IO;
 
 namespace DataLibrary.Access
 {
@@ -32,7 +33,7 @@ namespace DataLibrary.Access
                 Id = id,
                 Active = active,
                 CategoryTitle = title,
-                Clip = clip
+                Clips = clip
             };
 
             string sql = @"insert into dbo.Category (CategoryId, CategoryTitle, Active, Clips)
@@ -43,9 +44,40 @@ namespace DataLibrary.Access
         public static int SaveData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
+            {               
                 return cnn.Execute(sql, data);
             }
+        }
+        public static void SaveRecord(CategoryModel model)
+        {
+            using (SqlConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(model.Clips);
+
+                SqlCommand command = new SqlCommand("dbo.Category", cnn);
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"INSERT INTO dbo.Category(CategoryTitle,Active, Clips) 
+                            VALUES(@CategoryTitle,@Active,@Clips)";
+
+
+                command.Parameters.AddWithValue("@CategoryTitle", model.CategoryTitle);
+                command.Parameters.AddWithValue("@Active", model.Active);
+                command.Parameters.AddWithValue("@Clips", jsonString);
+
+                try
+                {
+                    cnn.Open();
+                    command.ExecuteNonQuery();
+                    cnn.Close();
+                }
+                catch(SqlException ex)
+                {
+
+                }
+            
+                
+            }
+            
         }
     }
 }
